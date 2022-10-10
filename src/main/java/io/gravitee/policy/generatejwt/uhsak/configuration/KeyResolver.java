@@ -13,27 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.generatejwt.alg;
-
-import com.nimbusds.jose.JWSAlgorithm;
+package io.gravitee.policy.generatejwt.uhsak.configuration;
 
 /**
  * @author David BRASSELY (david.brassely at graviteesource.com)
  * @author GraviteeSource Team
  */
-public enum Signature {
-    RSA_RS256(JWSAlgorithm.RS256),
-    HMAC_HS256(JWSAlgorithm.HS256),
-    HMAC_HS384(JWSAlgorithm.HS384),
-    HMAC_HS512(JWSAlgorithm.HS512);
-
-    private JWSAlgorithm alg;
-
-    Signature(JWSAlgorithm alg) {
-        this.alg = alg;
-    }
-
-    public JWSAlgorithm getAlg() {
-        return alg;
-    }
+public enum KeyResolver {
+    INLINE,
+    JKS,
+    PKCS12,
+    PEM,
 }

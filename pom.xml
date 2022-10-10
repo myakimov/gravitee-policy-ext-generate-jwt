@@ -20,8 +20,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.gravitee.policy</groupId>
-    <artifactId>gravitee-policy-generate-jwt</artifactId>
+    <groupId>io.gravitee.policy.ext</groupId>
+    <artifactId>gravitee-policy-generate-jwt-uhsak</artifactId>
     <version>1.6.0</version>
 
     <name>Gravitee.io APIM - Policy - Generate JWT</name>

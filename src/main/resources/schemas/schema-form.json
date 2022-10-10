@@ -64,6 +64,11 @@
       "title": "Key ID",
       "description": "Specifies the key ID (kid) to include in the JWT header"
     },
+    "x5t" : {
+      "type" : "string",
+      "title": "Certificate Fingerprint (SHA1)",
+      "description": "Specifies the x5t header value, which is a Base64 URL encoded SHA1 certificate fingerprint"
+    },
     "x509CertificateChain": {
       "title": "Certificate chain",
       "description": "Whether a certificate chain should be added as an X5C attribute (only for RS256, JKS and PKCS#12)",
@@ -139,6 +144,14 @@
           "lineNumbers": true,
           "allowDropFileTypes": true
         }
+      }
+    },
+    "groups" : {
+      "type" : "array",
+      "title": "List of access groups",
+      "description": "Specify custom claim groups array content",
+      "items" : {
+        "type" : "string"
       }
     },
     "customClaims" : {

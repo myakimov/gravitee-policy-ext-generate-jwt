@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.generatejwt.configuration;
+package io.gravitee.policy.generatejwt.uhsak.configuration;
 
 import io.gravitee.policy.api.PolicyConfiguration;
-import io.gravitee.policy.generatejwt.alg.Signature;
-import io.gravitee.policy.generatejwt.model.Claim;
+import io.gravitee.policy.generatejwt.uhsak.alg.Signature;
+import io.gravitee.policy.generatejwt.uhsak.model.Claim;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -41,6 +41,8 @@ public class GenerateJwtPolicyConfiguration implements PolicyConfiguration {
 
     private String kid;
 
+    private String x5t;
+
     private X509CertificateChain x509CertificateChain = X509CertificateChain.NONE;
 
     private List<String> audiences;
@@ -56,6 +58,24 @@ public class GenerateJwtPolicyConfiguration implements PolicyConfiguration {
     private String subject;
 
     private List<Claim> customClaims;
+
+    private List<String> groups;
+
+    public String getX5t() {
+        return x5t;
+    }
+
+    public void setX5t(String x5t) {
+        this.x5t = x5t;
+    }
+
+    public List<String> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(List<String> groups) {
+        this.groups = groups;
+    }
 
     public KeyResolver getKeyResolver() {
         return keyResolver;

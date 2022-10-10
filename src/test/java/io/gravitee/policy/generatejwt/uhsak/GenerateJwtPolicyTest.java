@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.generatejwt;
+package io.gravitee.policy.generatejwt.uhsak;
 
 import static org.mockito.Mockito.*;
 
@@ -30,11 +30,11 @@ import io.gravitee.gateway.api.Request;
 import io.gravitee.gateway.api.Response;
 import io.gravitee.policy.api.PolicyChain;
 import io.gravitee.policy.api.PolicyResult;
-import io.gravitee.policy.generatejwt.alg.Signature;
-import io.gravitee.policy.generatejwt.configuration.GenerateJwtPolicyConfiguration;
-import io.gravitee.policy.generatejwt.configuration.KeyResolver;
-import io.gravitee.policy.generatejwt.configuration.X509CertificateChain;
-import io.gravitee.policy.generatejwt.model.Claim;
+import io.gravitee.policy.generatejwt.uhsak.alg.Signature;
+import io.gravitee.policy.generatejwt.uhsak.configuration.GenerateJwtPolicyConfiguration;
+import io.gravitee.policy.generatejwt.uhsak.configuration.KeyResolver;
+import io.gravitee.policy.generatejwt.uhsak.configuration.X509CertificateChain;
+import io.gravitee.policy.generatejwt.uhsak.model.Claim;
 import io.gravitee.reporter.api.http.Metrics;
 import java.io.ByteArrayInputStream;
 import java.io.File;
@@ -42,7 +42,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.security.SecureRandom;
-import java.security.cert.CertificateException;
 import java.security.cert.CertificateFactory;
 import java.security.cert.X509Certificate;
 import java.util.ArrayList;

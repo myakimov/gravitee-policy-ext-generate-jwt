@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.generatejwt.configuration;
+package io.gravitee.policy.generatejwt.uhsak.configuration;
 
 /**
  * @author Erlend Garåsen (e.f.garasen at usit.uio.no)

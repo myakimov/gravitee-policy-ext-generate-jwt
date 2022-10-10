@@ -13,10 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.generatejwt.configuration;
+package io.gravitee.policy.generatejwt.uhsak.configuration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.gravitee.policy.generatejwt.alg.Signature;
+import io.gravitee.policy.generatejwt.uhsak.alg.Signature;
 import java.io.IOException;
 import java.net.URL;
 import java.util.concurrent.TimeUnit;

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.gravitee.policy.generatejwt;
+package io.gravitee.policy.generatejwt.uhsak;
 
 import static java.security.KeyStore.*;
 
@@ -25,6 +25,7 @@ import com.nimbusds.jose.crypto.RSASSASigner;
 import com.nimbusds.jose.jwk.JWK;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.util.Base64;
+import com.nimbusds.jose.util.Base64URL;
 import com.nimbusds.jose.util.IOUtils;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
@@ -35,9 +36,9 @@ import io.gravitee.gateway.api.Response;
 import io.gravitee.policy.api.PolicyChain;
 import io.gravitee.policy.api.PolicyResult;
 import io.gravitee.policy.api.annotations.OnRequest;
-import io.gravitee.policy.generatejwt.alg.Signature;
-import io.gravitee.policy.generatejwt.configuration.GenerateJwtPolicyConfiguration;
-import io.gravitee.policy.generatejwt.configuration.X509CertificateChain;
+import io.gravitee.policy.generatejwt.uhsak.alg.Signature;
+import io.gravitee.policy.generatejwt.uhsak.configuration.GenerateJwtPolicyConfiguration;
+import io.gravitee.policy.generatejwt.uhsak.configuration.X509CertificateChain;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -86,9 +87,11 @@ public class GenerateJwtPolicy {
     private static List<Base64> certificateChain = new ArrayList<>();
 
     /**
-     * Create a new Generate JWT Policy instance based on its associated configuration
+     * Create a new Generate JWT Policy instance based on its associated
+     * configuration
      *
-     * @param configuration the associated configuration to the new Generate JWT Policy instance
+     * @param configuration the associated configuration to the new Generate JWT
+     *                      Policy instance
      */
     public GenerateJwtPolicy(GenerateJwtPolicyConfiguration configuration) {
         this.configuration = configuration;
@@ -106,6 +109,11 @@ public class GenerateJwtPolicy {
                 signer = getSigner(hash);
 
                 JWSHeader.Builder builder = new JWSHeader.Builder(JWSAlgorithm.RS256).keyID(configuration.getKid());
+
+                if (configuration.getX5t() != null) {
+                    builder.x509CertThumbprint(new Base64URL(configuration.getX5t()));
+                }
+
                 if (configuration.getX509CertificateChain() == X509CertificateChain.X5C) {
                     builder.x509CertChain(certificateChain);
                 }
@@ -260,6 +268,12 @@ public class GenerateJwtPolicy {
                 .getCustomClaims()
                 .forEach(claim -> claimsSet.claim(claim.getName(), templatizeObject(executionContext, claim.getValue())));
         }
+
+        // Groups
+        if (configuration.getGroups() != null && !configuration.getGroups().isEmpty()) {
+            claimsSet.claim("groups", configuration.getGroups());
+        }
+
         return claimsSet.build();
     }
 
